@@ -14,7 +14,7 @@ tags:
   - name: Book
 
 paths:
-  /ping:
+  /:
     get:
       tags:
         - Servers
@@ -87,7 +87,7 @@ paths:
           description: book added
           content:
             text/plain:
-              example: Book successfully added to the list
+              example: Category successfully added to the list
         400:
           description: Bad request
           content:
@@ -318,7 +318,7 @@ components:
       properties:
         id:
           type: number
-        name:
+        type:
           type: string
           example : Aventure
     NewCategory:
@@ -348,10 +348,10 @@ components:
         auteur :
           type: string
           example : 'Victore Hugo'
-        nombre_page : 
+        page_size :
           type: number
           example : 120
-        nombre_d'emprunte :
+        borrow :
           type: number  
           example : 3
     newBook :
@@ -370,10 +370,10 @@ components:
         auteur :
           type: string
           example : 'Victore Hugo'
-        nombre_page : 
+        page_size :
           type: number
           example : 120
-        nombre_d'emprunte :
+        borrow :
           type: number  
           example : 3
     roles:
