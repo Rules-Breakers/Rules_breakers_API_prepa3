@@ -1,0 +1,385 @@
+openapi: 3.0.3
+info:
+  title: Librairies
+  description: Gestion de circulation de livre
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0
+  version: '1.0.1'
+servers:
+  - url: 'https://localhost:8080'
+tags:
+  - name: Servers
+  - name: Category
+  - name: Book
+
+paths:
+  /ping:
+    get:
+      tags:
+        - Servers
+      summary: Check the servers
+      description: Checking if the server is on
+      responses:
+        200:
+          description: Server is on
+          content:
+            text/plain:
+              example: Hello, we're the Rules Breakers
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badrequest'
+  /whoami:
+    get:
+      tags:
+        - Servers
+      summary: Check the roles
+      description: Checking your position
+      responses:
+        200:
+          description: who are you ?
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/roles'
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badrequest'
+  /category :
+    get :
+      tags:
+        - Category
+      summary : Get all category of book 
+      description : Get all category of book
+      responses :
+        200:
+          description: All list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badrequest'
+    post : 
+      tags:
+        - Category
+      summary: Add new Category
+      description: Add new Category to the list
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/NewCategory'
+      responses:
+        200:
+          description: book added
+          content:
+            text/plain:
+              example: Book successfully added to the list
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badrequest'
+    delete:
+      tags:
+        - Category
+      summary: Delete a Category from the List
+      description: Delete the Category having the entered id form the list
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: number
+            example: 1
+          required: true
+      responses:
+        200:
+          description: Category successfully deleted
+          content:
+            text/plain:
+              example: "Category successfully deleted from the list"
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badrequest'
+
+
+  /books:
+    get:
+      tags:
+      - Book
+      summary: Get all books with any status
+      operationId: Get all books with any status
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: number
+            example: 1
+          required: true
+        - name: page_size
+          in: query
+          schema:
+            type: number
+            example: 1
+          required: true
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref : '#/components/schemas/Book'
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badrequest'
+    post : 
+      tags:
+        - Book
+      summary: Add new book
+      description: Add new book to the list
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/newBook'
+      responses:
+        200:
+          description: book added
+          content:
+            text/plain:
+              example: Book successfully added to the list
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badrequest'
+    put :
+      tags :
+        - Book
+      summary: Update informations of a book
+      description: |
+        Possible updates on : 
+        * book's name
+        * book's category
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: number
+            example: 1
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Book'
+      responses:
+        200:
+          description: book added
+          content:
+            text/plain:
+              example: Book successfully added to the list
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badrequest'
+    delete:
+      tags:
+        - Book
+      summary: Delete a Book from the List
+      description: Delete the Book having the entered id form the list
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: number
+            example: 1
+          required: true
+      responses:
+        200:
+          description: Book successfully deleted
+          content:
+            text/plain:
+              example: "Book successfully deleted from the list"
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badrequest'
+
+  /books/borrowed:
+    get:
+      tags:
+      - Book
+      summary: Get Borrowed Book 
+      operationId: Get Borrowed Book 
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: number
+            example: 1
+          required: true
+        - name: page_size
+          in: query
+          schema:
+            type: number
+            example: 1
+          required: true
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref : '#/components/schemas/Book'
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badrequest'
+  /books/free:
+    get:
+      tags:
+      - Book
+      summary: Get free book
+      operationId: Get Borrowed free
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: number
+            example: 1
+          required: true
+        - name: page_size
+          in: query
+          schema:
+            type: number
+            example: 1
+          required: true
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref : '#/components/schemas/Book'
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badrequest'
+
+components:
+  schemas:
+    badrequest:
+      description: 'Bad request exception'
+      type: object
+      properties:
+        type:
+          type: string
+          example: BadRequestException
+        message:
+          type: string
+          example: Bad request
+    Category:
+      title: Category
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+          example : Aventure
+    NewCategory:
+      title: Category
+      type: object
+      properties:
+        name:
+          type: string
+          example : Aventure
+    Book:
+      title: Book
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+          example : 'Livre de la Jungle'
+        category:
+          type: array
+          items: 
+            $ref : '#/components/schemas/Category'
+        status:
+          type: string
+          example : 'emprunter'
+        auteur :
+          type: string
+          example : 'Victore Hugo'
+        nombre_page : 
+          type: number
+          example : 120
+        nombre_d'emprunte :
+          type: number  
+          example : 3
+    newBook :
+      title: newBook 
+      properties:
+        name:
+          type: string
+          example : 'Livre de la Jungle'
+        category:
+          type: array
+          items: 
+            $ref : '#/components/schemas/Category'
+        status:
+          type: string
+          example : 'emprunter'
+        auteur :
+          type: string
+          example : 'Victore Hugo'
+        nombre_page : 
+          type: number
+          example : 120
+        nombre_d'emprunte :
+          type: number  
+          example : 3
+    roles:
+      description: 'All roles for different authorization'
+      type: object
+      properties:
+        role:
+          type: string
+          example: administrateur
