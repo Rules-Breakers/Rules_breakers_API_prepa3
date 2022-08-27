@@ -18,7 +18,7 @@ public class Book implements Serializable {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "id_category")
     private List<Category> category;
     private boolean available = true;

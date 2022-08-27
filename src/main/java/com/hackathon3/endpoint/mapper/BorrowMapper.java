@@ -20,6 +20,7 @@ public class BorrowMapper {
   public Borrow toDomain(RestBorrow toCreate){
     Borrow domainBorrow = new Borrow();
     Book book = service.getBookById(toCreate.getId_book()).get();
+    book.setAvailable(false);
     domainBorrow.setBook(book);
     domainBorrow.setBorrowing_date(toCreate.getBorrowing_date());
     domainBorrow.setGiving_back_date(toCreate.getGiving_back_date());

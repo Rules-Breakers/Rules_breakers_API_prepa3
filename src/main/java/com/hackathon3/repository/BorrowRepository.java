@@ -11,4 +11,8 @@ public interface BorrowRepository extends JpaRepository<Borrow, Long> {
   int countBorrowingDate(
           @Param("book") Book book
   );
+  @Query("select b.borrowing_date as borrowing_date, b.giving_back_date as giving_back_date from Borrow b where b.book.id = :id ")
+  Object[] history(
+          @Param("id") Long id
+  );
 }

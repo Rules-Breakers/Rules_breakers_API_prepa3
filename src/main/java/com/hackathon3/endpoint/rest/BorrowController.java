@@ -7,6 +7,7 @@ import com.hackathon3.service.BorrowService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,5 +29,9 @@ public class BorrowController {
   @GetMapping
   public List<Borrow> getAllBorrow(){
     return service.findBorrow();
+  }
+  @GetMapping("/history/{id}")
+  public Object[] getHistory(@PathVariable Long id){
+    return service.historyBorrow(id);
   }
 }

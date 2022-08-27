@@ -1,6 +1,7 @@
 package com.hackathon3.service;
 
 
+import com.hackathon3.model.Book;
 import com.hackathon3.model.Borrow;
 import com.hackathon3.repository.BorrowRepository;
 import lombok.AllArgsConstructor;
@@ -14,6 +15,9 @@ public class BorrowService {
   private BorrowRepository repository;
   public Borrow createBorrow(Borrow newBorrow){
     return repository.save(newBorrow);
+  }
+  public Object[] historyBorrow(Long id){
+    return repository.history(id);
   }
   public List<Borrow> findBorrow(){
     return repository.findAll();
