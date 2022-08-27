@@ -45,4 +45,8 @@ public class BookController {
         return bookService.saveAllBook(bookMapper.bookList(book)).stream()
                 .map(bookMapper::toRest).toList();
     }
+    @PutMapping
+    public RestBook updateBook(@RequestBody RestBorrow borrow) {
+        return bookMapper.toRest(bookService.updateBooks(borrow));
+    }
 }

@@ -1,5 +1,6 @@
 package com.hackathon3.service;
 
+import com.hackathon3.endpoint.mapper.restBorrow.RestBorrow;
 import com.hackathon3.model.Book;
 import com.hackathon3.model.Borrow;
 import com.hackathon3.repository.BookRepo;
@@ -30,6 +31,12 @@ public class BookService {
     public void deleteBook (Long id){
         boolean exist = bookRepo.findById(id).isPresent();
         if(exist) bookRepo.deleteById(id);
+    }
+
+    public Book updateBooks(RestBorrow borrow){
+        Optional<Book> book = bookRepo.findById(borrow.getId_book());
+        book.get().setAvailable(false);
+        return bookRepo.save(book.get());
     }
     public List<Book> saveAllBook(List<Book> toWrite) {
         return bookRepo.saveAll(toWrite);
