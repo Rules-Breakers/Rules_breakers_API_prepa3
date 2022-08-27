@@ -15,7 +15,11 @@ import java.util.List;
 @Getter
 public class CategoryController {
     private final CategoryService categoryService;
-
+    @DeleteMapping("/{id}")
+    public @ResponseBody String deleteBook (@PathVariable Long id) {
+        categoryService.deleteBook(id);
+        return "category deleted successfully";
+    }
     @GetMapping
     public List<Category> getCategory(){
         return categoryService.getCategory();

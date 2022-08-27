@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.*;
 @EqualsAndHashCode
 public class LoginController {
     private RegistrationService registrationService;
-    @PostMapping
+ /**   @PostMapping
     public String login(@RequestBody User loginUser) {
         if(loginUser.getPassword().equals(registrationService.getPassword(loginUser.getName()))){
             registrationService.loadUserByUsername(loginUser.getName());
             return "connexion faite";
         }
         return "invalide coordonnée";
-    }
+    }*/
 }
