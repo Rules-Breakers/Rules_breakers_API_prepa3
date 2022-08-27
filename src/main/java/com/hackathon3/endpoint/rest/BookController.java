@@ -3,6 +3,7 @@ package com.hackathon3.endpoint.rest;
 import com.hackathon3.endpoint.mapper.BookMapper;
 import com.hackathon3.endpoint.mapper.restBook.NewBook;
 import com.hackathon3.endpoint.mapper.restBook.RestBook;
+import com.hackathon3.endpoint.mapper.restBorrow.RestBorrow;
 import com.hackathon3.model.Book;
 import com.hackathon3.service.BookService;
 import lombok.AllArgsConstructor;

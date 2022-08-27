@@ -9,6 +9,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 @AllArgsConstructor
 public class BookService {
@@ -18,7 +20,9 @@ public class BookService {
         return  bookRepo.findAll(pageable).toList();
     }
 
-
+    public Optional<Book> getBookById(Long id){
+        return bookRepo.findById(id);
+    }
     public List<Book> getBookStatus (int page , int page_size , boolean available) {
         Pageable pageable = PageRequest.of(page,page_size);
         return bookRepo.findBookByAvailable(pageable , available);
