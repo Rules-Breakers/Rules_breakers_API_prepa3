@@ -23,6 +23,10 @@ public class BookService {
         Pageable pageable = PageRequest.of(page,page_size);
         return bookRepo.findBookByAvailable(pageable , available);
     }
+    public void deleteBook (Long id){
+        boolean exist = bookRepo.findById(id).isPresent();
+        if(exist) bookRepo.deleteById(id);
+    }
     public List<Book> saveAllBook(List<Book> toWrite) {
         return bookRepo.saveAll(toWrite);
     }

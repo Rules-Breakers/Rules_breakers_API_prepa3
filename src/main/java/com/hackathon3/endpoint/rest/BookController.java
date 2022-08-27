@@ -34,6 +34,11 @@ public class BookController {
     ){
         return bookService.getBookStatus(page,page_size,available);
     }
+    @DeleteMapping("/{id}")
+    public @ResponseBody String deleteBook (@PathVariable Long id) {
+        bookService.deleteBook(id);
+        return "book deleted successfully";
+    }
     @PostMapping
     public List<RestBook> createCocktails(@RequestBody List<NewBook> book) {
         return bookService.saveAllBook(bookMapper.bookList(book)).stream()

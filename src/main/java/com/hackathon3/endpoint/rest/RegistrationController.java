@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class RegistrationController {
         private RegistrationService registrationService;
-        @PostMapping
+   /**     @PostMapping
         public String register(@RequestBody Users request) {
             return registrationService.signUp(request);
-        }
+        } */
 }

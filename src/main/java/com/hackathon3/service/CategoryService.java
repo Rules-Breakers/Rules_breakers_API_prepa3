@@ -19,6 +19,10 @@ public class CategoryService {
     public List<Category> getCategory() {
         return categoryRepo.findAll();
     }
+    public void deleteBook (Long id){
+        boolean exist = categoryRepo.findById(id).isPresent();
+        if(exist) categoryRepo.deleteById(id);
+    }
     public String addCategory(Category category) throws IllegalArgumentException{
         try{
             categoryRepo.save(category);
