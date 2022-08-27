@@ -1,7 +1,8 @@
 package com.hackathon3.service;
 
+import com.hackathon3.endpoint.mapper.restBook.NewCategory;
 import com.hackathon3.model.Category;
-import com.hackathon3.model.NewBook;
+import com.hackathon3.endpoint.mapper.restBook.NewBook;
 import com.hackathon3.repository.CategoryRepo;
 import lombok.AllArgsConstructor;
 import lombok.Setter;
@@ -28,10 +29,10 @@ public class CategoryService {
         }
         return "Category not added to the list";
     }
-    public List<Category> getCategories(List<NewBook> list) {
+    public List<Category> getCategories(List<NewCategory> list) {
         List<Category> category = new ArrayList<>();
-        for (NewBook id : list) {
-            category.add(categoryRepo.findById(id.getId_category()).get());
+        for (NewCategory newCategory : list) {
+            category.add(categoryRepo.findById(newCategory.getId_category()).get());
         }
         return category;
     }

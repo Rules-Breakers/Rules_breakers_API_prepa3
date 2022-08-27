@@ -1,6 +1,8 @@
 package com.hackathon3.endpoint.rest;
 
-import com.hackathon3.endpoint.mapper.BookMapped;
+import com.hackathon3.endpoint.mapper.BookMapper;
+import com.hackathon3.endpoint.mapper.restBook.NewBook;
+import com.hackathon3.endpoint.mapper.restBook.RestBook;
 import com.hackathon3.model.Book;
 import com.hackathon3.service.BookService;
 import lombok.AllArgsConstructor;
@@ -14,12 +16,15 @@ import java.util.List;
 @RequestMapping("/books")
 public class BookController {
     private final BookService bookService;
-    private final BookMapped bookMapped;
+    private BookMapper bookMapper;
     @GetMapping
-    public List<Book> getBooks(@RequestParam int page ,
-                               @RequestParam int page_size
-                               ) {
-        return bookService.getAll(page,page_size);
+    public List<RestBook> get(
+            @RequestParam int page,
+            @RequestParam int page_size
+    ) {
+        return bookService.getAll(page, page_size).stream()
+                .map(bookMapper::toRest)
+                .toList();
     }
     @GetMapping("/{available}")
     public List<Book> getBorrowBook (
@@ -30,7 +35,8 @@ public class BookController {
         return bookService.getBookStatus(page,page_size,available);
     }
     @PostMapping
-    public List<Book> createCocktails(@RequestBody List<Book> book) {
-        return bookService.saveAllBook(bookMapped.bookList(book));
+    public List<RestBook> createCocktails(@RequestBody List<NewBook> book) {
+        return bookService.saveAllBook(bookMapper.bookList(book)).stream()
+                .map(bookMapper::toRest).toList();
     }
 }

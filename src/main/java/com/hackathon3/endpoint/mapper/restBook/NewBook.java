@@ -1,6 +1,8 @@
-package com.hackathon3.model;
+package com.hackathon3.endpoint.mapper.restBook;
 
 import lombok.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @Getter
@@ -8,10 +10,9 @@ import lombok.*;
 @ToString
 @EqualsAndHashCode
 public class NewBook {
-    private Long id_category;
     private String name;
+    private List<NewCategory> category;
     private boolean available = true;
     private String auteur;
-    private int borrow;
     private int page_size;
 }
